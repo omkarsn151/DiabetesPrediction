@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diabetes Prediction</title>
+
+
+
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}"> -->
+
+    <!-- <script src="script.js"></script> -->
+
+
+
+    <!-- <script>
+        window.onload = function() {
+            document.getElementById('result').innerText = '';
+        }
+    </script> -->
+
+    <!-- <script>
+        window.onload = function(){
+            if(window.location.pathname !== '/'){
+                window.location.href = '/';
+             } else {
+                 document.getElementById('result').innerText = '' ;
+             }
+        }
+    </script> -->
+
+
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const inputContainers = document.querySelectorAll('.input-container');
+      
+          inputContainers.forEach(function(inputContainer) {
+            const input = inputContainer.querySelector('.input');
+            const cut = inputContainer.querySelector('.cut');
+      
+            input.addEventListener('focus', function() {
+              cut.style.display = 'block';
+            });
+      
+            input.addEventListener('blur', function() {
+              cut.style.display = 'none';
+            });
+          });
+        });
+      </script> -->
+
+
+
+      <script>
+
+        const inputFields = document.querySelectorAll('.input');
+        inputFields.forEach(input => {
+          input.addEventListener('input', () => {
+            input.parentElement.querySelector('.cut').style.backgroundColor = input.value ? '#1f2256' : 'transparent';
+          });
+        });
+
+
+
+        function animateButton(){
+            var button = document.querySelector('.btn');
+            button.classList.add('clicked');
+
+
+            setTimeout(function() {
+                button.classList.remove('clicked');}, 150);
+        }
+
+       
+
+        // document.getElementById('reloadButton').addEventListener('click', function() {
+        //   if(window.location.pathname !== '/'){
+        //         window.location.href = '/';
+        //      } else {
+        //          document.getElementById('result').innerText = '' ;
+        //      }
+        // })
+        
+        
+      
+
+      //   document.getElementById('reloadButton').addEventListener('click', function() {
+      //       // Replace 'https://www.yourhomepage.com' with the URL of your home page
+      //       location.href = 'http://127.0.0.1:5002/';
+      //   }
+      // );
+        
+        
+      </script>
+ 
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sevillana&display=swap');
+
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: rgb(9,9,121);
+        background: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(2,0,36,1) 48%, rgba(9,9,121,1) 100%);
+        }
+      .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      form {
+        background-color: #1f2256;
+        /* background: linear-gradient(15deg, #1f2256, #3a3f8e,#1f2256); */
+        background: linear-gradient(15deg, #1a1c3b, #313574,#1e2259);
+        /* background: linear-gradient(15deg, #131536, #2d3173,#1a1c4d); */
+        border-radius: 20px;
+        box-sizing: border-box;
+        height: auto;
+        width: 480px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+      }
+      h1 {
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #eee;
+        font-family: 'Montserrat','Poppins' ;
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 28px;
+        text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+      }
+      h2 {
+        color: #eee;
+        font-family: 'Montserrat','Poppins' ;
+        font-size: 20px;
+        font-weight: 400;
+        margin: 8px
+      }
+
+      .input-container {
+        height: 42px;
+        position: relative;
+        width: 80%;
+      }
+
+      .ic1 {
+        margin-top: 22px;
+      }
+
+      .input {
+        background-color: #252846;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        font-size: 15px;
+        height: 100%;
+        outline: 0;
+        padding: 4px 20px 0;
+        width: 100%;
+        box-shadow:  0 4px 6px rgba(0, 0, 0, 0.2);
+        
+      }
+      
+
+      input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0; 
+        }
+
+
+
+      .cut {
+        background-color: #1f2256;
+        border-radius: 10px;
+        height: 20px;
+        left: 20px;
+        position: absolute;
+        top: -20px;
+        transform: translateY(0);
+        transition: transform 200ms;
+        width: 76px;
+        display: none;
+      }
+
+
+      .input-container:focus-within .cut,
+    .input:not(:placeholder-shown) ~ .cut { 
+      display: block;
+    }
+
+      .input:focus ~ .cut,
+      .input:not(:placeholder-shown) ~ .cut {
+        transform: translateY(8px);
+      }
+
+      .placeholder {
+        color: #6a6a80;
+        font-family: 'Montserrat','Poppins' ;
+        font-size: 15px;
+        left: 20px;
+        line-height: 10px;
+        pointer-events: none;
+        position: absolute;
+        transform-origin: 0 50%;
+        transition: transform 200ms, color 200ms;
+        top: 20px;
+      }
+
+      .input:focus ~ .placeholder,
+      input:not(:placeholder-shown) ~ .placeholder {
+        transform: translateY(-26px) translateX(12px) scale(0.75);
+      }
+
+      .input:not(:placeholder-shown) ~ .placeholder {
+        color: #808097;
+      }
+      .input:focus ~ .placeholder {
+        font-size: 15px;
+        font-family: 'Montserrat','Poppins' ;
+        color: rgb(31, 146, 218);   
+      }
+
+      .btn {
+        background: rgb(48,82,222);
+        background: linear-gradient(90deg, rgba(48,82,222,1) 4%, rgba(23,57,205,1) 50%, rgba(48,82,222,1) 96%);
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 17px;
+        font-family: 'Montserrat','Poppins' ;
+        font-weight: 600;
+        height: 42px;
+        margin-top: 28px;
+        margin-bottom: 20px;
+        outline: 0;
+        text-align: center;
+        width: 80%;
+        box-shadow:  0 4px 6px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+        transition: background-color 0.2s, transform 0.05s;
+      }
+
+
+      .btn.clicked {
+        background-color: rgb(48,82,222);
+        transform: scale(0.99); 
+  }
+
+      .res {
+        width: 80%;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 0px;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: 'Montserrat','Poppins' ;
+        text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+
+      }
+
+
+
+
+    @media (max-width: 600px) {
+
+    form {
+      width: 90%;
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    .input-container {
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+    </style>
+
+
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <form action="/predict" method="post">
+
+        <h1>Diabetes Prediction</h1>
+
+        <!-- <button id="reloadButton">Reload Page</button> -->
+
+        <!-- Pregnancy -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="pregnancy" id="pregnancy" placeholder=" " value="{{ form_data.pregnancy if form_data is not none else '' }}" required>
+            <div class="cut" style="width: 158px;"></div>
+            <label for="pregnancy" class="placeholder">Number of Pregnancies</label>
+        </div>
+        
+
+        <!-- Glucose -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="glucose" id="glucose" placeholder=" " value="{{form_data.glucose if form_data is not none else '' }}" required>
+            <div class="cut" style="width: 98px;"></div>
+            <label for="glucose" class="placeholder">Glucose Level</label>
+        </div>
+
+
+        <!-- Blood pressure -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="blood_pressure" id="blood_pressure" placeholder=" " value="{{form_data.blood_pressure if form_data is not none else ''}}" required>
+            <div class="cut" style="width: 144px;"></div>
+            <label for="blood_pressure" class="placeholder">Blood Pressure Level</label>
+        </div>
+
+
+
+        <!-- Skin thickness -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="skin_thickness" id="skin_thickness" placeholder=" " value="{{form_data.skin_thickness if form_data is not none else ''}}" required>
+            <div class="cut" style="width: 107px;"></div>
+            <label for="skin_thickness" class="placeholder">Skin Thickness</label>
+        </div>
+
+
+        <!-- Insulin level -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="insulin" id="insulin" placeholder=" " value="{{form_data.insulin if form_data is not none else ''}}" required>
+            <div class="cut" style="width: 93px;"></div>
+            <label for="insulin" class="placeholder">Insulin Level</label>
+        </div>
+
+
+
+        <!-- BMI -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="bmi" id="bmi" placeholder=" " value="{{form_data.bmi if form_data is not none else ''}}" required>
+            <div class="cut" style="width: 48px;"></div>
+            <label for="bmi" class="placeholder">BMI</label>
+        </div>
+
+        
+
+
+        <!-- Diabetes predigree -->
+        <div class="input-container ic1">
+            <input class="input" type="float" name="diabetes_pedigree_function" id="diabetes_pedigree_function" placeholder=" " value="{{form_data.diabetes_pedigree_function if form_data is not none else ''}}" required>
+            <div class="cut" style="width: 179px;"></div>
+            <label for="diabetes_pedigree_function" class="placeholder">Diabetes Pedigree Function</label>
+        </div>
+
+        
+
+        <!-- Age -->
+        <div class="input-container ic1">
+            <input class="input" type="number" name="age" id="age" placeholder=" " value="{{form_data.age if form_data is not none else ''}}" required>
+            <div class="cut" style="width: 47px;"></div>
+            <label for="age" class="placeholder">Age</label>
+        </div>
+
+        <!-- 
+        <label for="Pregnancy">Pregnancies:</label>
+        <input type="number" name="Pregnancy" value="{{pregnancy}}" required><br>
+
+        <label for="Glucose">Glucose:</label>
+        <input type="number" name="Glucose" value="{{glucose}}" required><br>
+
+        <label for="BloodPressure">Blood Pressure:</label>
+        <input type="number" name="BloodPressure" value="{{blood_pressure}}" required><br>
+
+        <label for="SkinThickness">Skin Thickness:</label>
+        <input type="number" name="SkinThickness" value="{{skin_thickness}}" required><br>
+
+        <label for="Insulin">Insulin:</label>
+        <input type="number" name="Insulin" value="{{insulin}}" required><br>
+
+        <label for="BMI">BMI:</label>
+        <input type="text" name="BMI" value="{{bmi}}" required><br>
+
+        <label for="DiabetesPedigreeFunction">Diabetes Pedigree Function:</label>
+        <input type="text" name="DiabetesPedigreeFunction" value="{{diabetes_pedigree_function}}" required><br>
+
+        <label for="Age">Age:</label>
+        <input type="number" name="Age" value="{{age}}" required><br> -->
+
+        <input class="btn" type="submit" onclick="animateButton()" value="Predict" />
+
+
+        {% if result is not none %}
+      <h2 class="res" id="res">{{result}}</h2>
+        {% endif %}
+
+      </form>
+
+      
+    </div>
+  </body>
+</html>
